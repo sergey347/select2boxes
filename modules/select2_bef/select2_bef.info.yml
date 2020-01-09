@@ -1,0 +1,14 @@
+name: Select2 Better Exposed Filters
+description: "Provides an integration between Select2 and Better Exposed Filters"
+type: module
+# core: 8.x
+
+dependencies:
+  - select2boxes:select2boxes
+  - better_exposed_filters:better_exposed_filters (<8.x-4.x)
+
+# Information added by Drupal.org packaging script on 2018-08-07
+version: '8.x-1.0-alpha3'
+core: '8.x'
+project: 'select2boxes'
+datestamp: 1533620886

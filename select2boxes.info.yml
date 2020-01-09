@@ -1,0 +1,11 @@
+name: Select2 Boxes
+description: 'Provides Select2 widgets.'
+type: module
+# core: 8.x
+configure: select2boxes.config_form
+
+# Information added by Drupal.org packaging script on 2018-08-07
+version: '8.x-1.0-alpha3'
+core: '8.x'
+project: 'select2boxes'
+datestamp: 1533620886
