@@ -73,6 +73,12 @@ class Select2BoxesTestsBase extends JavascriptTestBase {
    */
   public function setUp() {
     parent::setUp();
+
+    $config_factory = \Drupal::configFactory();
+    $select2boxes = $config_factory->getEditable('select2boxes.settings');
+    $select2boxes->set('select2_global', TRUE);
+    $select2boxes->save(TRUE);
+
     $user = $this->createUser([], NULL, TRUE);
     $this->drupalLogin($user);
     // Create list field.

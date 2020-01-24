@@ -130,6 +130,7 @@ class Select2BefTests extends Select2BoxesTestsBase {
         'xpath',
         '//input[@name="exposed_form_options[bef][filter][field_tags_target_id][configuration][advanced][reference_bundles][tags]"]'
       );
+
     $this->assertNotNull($bundles_element);
     $this->minkSession
       ->getPage()
@@ -193,79 +194,80 @@ class Select2BefTests extends Select2BoxesTestsBase {
     $this->assertEquals(5, count($this->getFieldById('select2-edit-field-tags-target-id-results')->findAll('xpath', '//li')));
   }
 
-//  /**
-//   * Test list exposed filters.
-//   */
-//  public function testListExposedFilters() {
-//    // Disable JS errors to prevent test failures
-//    // due to the View's module JS console errors.
-//    $this->minkSession->getDriver()->getBrowser()->jsErrors(FALSE);
-//    // Generate fake contents for testing.
-//    $this->generateDummyTerms('tags', 10);
-//    $this->generateDummyArticles(10);
-//    // Go to the view's creation page.
-//    $this->drupalGet('admin/structure/views/add');
-//    $this->assertEquals(200, $this->minkSession->getStatusCode());
-//
-//    // Fill all required fields and save the new view.
-//    $this->minkSession->getPage()->fillField('label', 'Test');
-//    $this->minkSession->wait(1000);
-//    $this->minkSession->getPage()->fillField('id', 'test');
-//    $this->minkSession->wait(1000);
-//    $this->minkSession->getPage()->selectFieldOption('show[type]', 'article');
-//    $this->minkSession->wait(5000);
-//    $this->minkSession->getPage()->checkField('page[create]');
-//    $this->minkSession->wait(1000);
-//    $this->minkSession->getPage()->fillField('page[title]', 'Test');
-//    $this->minkSession->getPage()->fillField('page[path]', 'test');
-//    $this->minkSession->wait(1000);
-//    $this->assertSession()->buttonExists('Save and edit')->click();
-//    $this->minkSession->wait(5000);
-//    $this->assertEquals(200, $this->minkSession->getStatusCode());
-//    $this->assertSession()->addressEquals('admin/structure/views/view/test');
-//    $this->assertTextHelper('The view Test has been saved', FALSE);
-//
-//    // Add filter by field "Tags" using the View's UI.
-//    $this->click('a[id="views-add-filter"]');
-//    $this->minkSession->wait(2000);
-//    $this->minkSession->getPage()->fillField('override[controls][options_search]', 'Test');
-//    $this->minkSession->getPage()->checkField('name[node__field_test_list.field_test_list_value]');
-//    $this->click('button.button--primary');
-//    $this->minkSession->wait(2000);
-//
-//    // Make filter exposed.
-//    $this->minkSession->getPage()->checkField('options[expose_button][checkbox][checkbox]');
-//    $this->minkSession->wait(2000);
-//    $this->click('button.button--primary');
-//    $this->minkSession->wait(5000);
-//
-//    $this->drupalGet('admin/structure/views/nojs/display/test/page_1/exposed_form');
-//    $this->assertEquals(200, $this->minkSession->getStatusCode());
-//    $edit = [
-//      'exposed_form[type]' => 'bef',
-//    ];
-//    $this->submitForm($edit, t('Apply'));
-//    $this->minkSession->wait(5000);
-//    $this->drupalGet('admin/structure/views/nojs/display/test/page_1/exposed_form_options');
-//    $this->assertEquals(200, $this->minkSession->getStatusCode());
-//    $edit = [
-//      'exposed_form_options[bef][filter][field_test_list_value][configuration][plugin_id]' => 'select2boxes_autocomplete_list',
-//    ];
-//    $this->submitForm($edit, t('Apply'));
-//    $this->minkSession->wait(5000);
-//    $this->saveForm();
-//    $this->minkSession->wait(5000);
-//
-//    $this->drupalGet('test');
-//    $this->assertEquals(200, $this->minkSession->getStatusCode());
-//
-//    $select = $this->getFieldById('edit-field-test-list-value');
-//    $this->assertNotNull($select);
-//    // Check if all required html attributes are exist
-//    // for the entity reference field.
-//    $this->assertNotNull($select->getAttribute('data-jquery-once-autocomplete'));
-//    $this->assertNotNull($select->getAttribute('data-select2-autocomplete-list-widget'));
-//    $this->assertTrue($select->hasClass('select2-widget'));
-//  }
+  /**
+   * Test list exposed filters.
+   */
+  public function testListExposedFilters() {
+    // Disable JS errors to prevent test failures
+    // due to the View's module JS console errors.
+    $this->minkSession->getDriver()->getBrowser()->jsErrors(FALSE);
+    // Generate fake contents for testing.
+    $this->generateDummyTerms('tags', 10);
+    $this->generateDummyArticles(10);
+    // Go to the view's creation page.
+    $this->drupalGet('admin/structure/views/add');
+    $this->assertEquals(200, $this->minkSession->getStatusCode());
+
+    // Fill all required fields and save the new view.
+    $this->minkSession->getPage()->fillField('label', 'Test');
+    $this->minkSession->wait(1000);
+    $this->minkSession->getPage()->fillField('id', 'test');
+    $this->minkSession->wait(1000);
+    $this->minkSession->getPage()->selectFieldOption('show[type]', 'article');
+    $this->minkSession->wait(5000);
+    $this->minkSession->getPage()->checkField('page[create]');
+    $this->minkSession->wait(1000);
+    $this->minkSession->getPage()->fillField('page[title]', 'Test');
+    $this->minkSession->getPage()->fillField('page[path]', 'test');
+    $this->minkSession->wait(1000);
+    $this->assertSession()->buttonExists('Save and edit')->click();
+    $this->minkSession->wait(5000);
+    $this->assertEquals(200, $this->minkSession->getStatusCode());
+    $this->assertSession()->addressEquals('admin/structure/views/view/test');
+    $this->assertTextHelper('The view Test has been saved', FALSE);
+
+    // Add filter by field "Tags" using the View's UI.
+    $this->click('a[id="views-add-filter"]');
+    $this->minkSession->wait(2000);
+    $this->minkSession->getPage()->fillField('override[controls][options_search]', 'Test');
+    $this->minkSession->getPage()->checkField('name[node__field_test_list.field_test_list_value]');
+    $this->click('button.button--primary');
+    $this->minkSession->wait(2000);
+
+    // Make filter exposed.
+    $this->minkSession->getPage()->checkField('options[expose_button][checkbox][checkbox]');
+    $this->minkSession->wait(2000);
+    $this->click('button.button--primary');
+    $this->minkSession->wait(5000);
+
+    $this->drupalGet('admin/structure/views/nojs/display/test/page_1/exposed_form');
+    $this->assertEquals(200, $this->minkSession->getStatusCode());
+    $edit = [
+      'exposed_form[type]' => 'bef',
+    ];
+    $this->submitForm($edit, t('Apply'));
+    $this->minkSession->wait(5000);
+    $this->drupalGet('admin/structure/views/nojs/display/test/page_1/exposed_form_options');
+    $this->assertEquals(200, $this->minkSession->getStatusCode());
+    $edit = [
+      'exposed_form_options[bef][filter][field_test_list_value][configuration][plugin_id]' => 'select2boxes_autocomplete_list',
+    ];
+    $this->submitForm($edit, t('Apply'));
+    $this->minkSession->wait(5000);
+    $this->saveForm();
+    $this->minkSession->wait(5000);
+
+    $this->drupalGet('test');
+    $this->assertEquals(200, $this->minkSession->getStatusCode());
+
+    $select = $this->getFieldById('edit-field-test-list-value');
+    $this->assertNotNull($select);
+
+    // Check if all required HTMLElement attributes are presented
+    // for the entity reference field.
+    $this->assertNotNull($select->getAttribute('data-jquery-once-autocomplete'));
+    $this->assertNotNull($select->getAttribute('data-select2-autocomplete-list-widget'));
+    $this->assertTrue($select->hasClass('select2-widget'));
+  }
 
 }
